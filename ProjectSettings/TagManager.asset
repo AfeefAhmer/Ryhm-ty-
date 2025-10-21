@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - HealItem
+  - XPItem
   layers:
   - Default
   - TransparentFX

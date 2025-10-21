@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class HealItem : MonoBehaviour
+public class XPItem : MonoBehaviour
 {
-    [Header("Parannusarvo")]
-    public int healAmount = 25; // Kuinka paljon HP:t‰ palautetaan
+    [Header("Kokemuspisteiden m‰‰r‰")]
+    public int xpAmount = 25; // Kuinka paljon XP:t‰ esine antaa
 
     public void Collect()
     {
-        Debug.Log($"Parannusesine ker‰tty! +{healAmount} HP");
-        Destroy(gameObject); // Poista esine pelist‰
+        Debug.Log($"Kokemusesine ker‰tty! +{xpAmount} XP");
+        Destroy(gameObject);
     }
 }
