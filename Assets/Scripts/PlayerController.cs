@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEditor.Progress;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement2D : MonoBehaviour
@@ -9,14 +8,9 @@ public class PlayerMovement2D : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movement;
 
-    [Header("Osumapisteet (Health)")]
-    public int maxHealth = 100;
-    private int currentHealth;
-
-    [Header("Kokemuspisteet (XP)")]
-    public int experience = 0;         // Pelaajan kokemus
-    public int levelUpThreshold = 100; // Kuinka paljon XP:tä tarvitaan tason nousuun
-    private int level = 1;
+    [Header("Osumapisteet")]
+    public int maxHealth = 100;   // Maksimi HP
+    private int currentHealth;    // Nykyinen HP
 
     void Awake()
     {
@@ -26,7 +20,7 @@ public class PlayerMovement2D : MonoBehaviour
 
     void Update()
     {
-        // Liike (WASD / nuolinäppäimet)
+        // Liike: WASD ja nuolinäppäimet
         movement.x = Input.GetAxis("Horizontal");
         movement.y = Input.GetAxis("Vertical");
     }
@@ -36,13 +30,13 @@ public class PlayerMovement2D : MonoBehaviour
         rb.linearVelocity = movement * speed;
     }
 
-    // ---------------------------
-    // OSUMAPISTEET
-    // ---------------------------
+    // --- OSUMAPISTEET ---
+
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
         Debug.Log($"Pelaaja otti vahinkoa! HP: {currentHealth}");
 
         if (currentHealth <= 0)
@@ -53,6 +47,7 @@ public class PlayerMovement2D : MonoBehaviour
     {
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
         Debug.Log($"Pelaaja parani! HP: {currentHealth}");
     }
 
@@ -62,45 +57,17 @@ public class PlayerMovement2D : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    // ---------------------------
-    // TRIGGER-TAPAHTUMAT
-    // ---------------------------
+    // --- PARANNUSESINEEN TUNNISTUS ---
     void OnTriggerEnter2D(Collider2D other)
     {
-
-
-        // Kokemusesine
-        if (other.CompareTag("XPItem"))
+        if (other.CompareTag("HealItem"))
         {
-            XPItem xp = other.GetComponent<XPItem>();
-            if (xp != null)
+            HealItem heal = other.GetComponent<HealItem>();
+            if (heal != null)
             {
-                GainExperience(xp.xpAmount);
-                xp.Collect();
+                Heal(heal.healAmount);      // Anna HP lisää
+                heal.Collect();              // Poista esine
             }
         }
-    }
-
-    // ---------------------------
-    // KOKEMUSPISTEET
-    // ---------------------------
-    public void GainExperience(int amount)
-    {
-        experience += amount;
-        Debug.Log($"Pelaaja sai {amount} XP! Yhteensä: {experience}");
-
-        if (experience >= levelUpThreshold)
-        {
-            LevelUp();
-        }
-    }
-
-    void LevelUp()
-    {
-        level++;
-        experience = 0; // tai jätä ylijäämä XP jos haluat realistisemman progression
-        levelUpThreshold += 50; // kasvattaa seuraavan tason vaatimusta
-
-        Debug.Log($"Taso nousi! Uusi taso: {level}");
     }
 }
