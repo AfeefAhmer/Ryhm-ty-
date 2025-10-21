@@ -211,16 +211,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1223718516 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6055437103751213464, guid: aa34d681fc19dca4b90f8a1389c5df7c, type: 3}
-  m_PrefabInstance: {fileID: 1861746332}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1233177360 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9005876852728512081, guid: e1d1c9d91c10150428433574dc5fd6e8, type: 3}
-  m_PrefabInstance: {fileID: 1940018653}
-  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &755014113
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4442049178668052083, guid: 0750050293b752a4eab2945c63b6a051, type: 3}
+      propertyPath: m_Name
+      value: Kokemuspiste
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160296097828545626, guid: 0750050293b752a4eab2945c63b6a051, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.5714037
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160296097828545626, guid: 0750050293b752a4eab2945c63b6a051, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.0184085
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160296097828545626, guid: 0750050293b752a4eab2945c63b6a051, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160296097828545626, guid: 0750050293b752a4eab2945c63b6a051, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160296097828545626, guid: 0750050293b752a4eab2945c63b6a051, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160296097828545626, guid: 0750050293b752a4eab2945c63b6a051, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160296097828545626, guid: 0750050293b752a4eab2945c63b6a051, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160296097828545626, guid: 0750050293b752a4eab2945c63b6a051, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160296097828545626, guid: 0750050293b752a4eab2945c63b6a051, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160296097828545626, guid: 0750050293b752a4eab2945c63b6a051, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0750050293b752a4eab2945c63b6a051, type: 3}
 --- !u!1001 &1769461576
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -371,10 +418,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 6055437103751213464, guid: aa34d681fc19dca4b90f8a1389c5df7c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1233177360}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa34d681fc19dca4b90f8a1389c5df7c, type: 3}
 --- !u!1001 &1940018653
@@ -383,8 +427,12 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1223718516}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2868987304065807968, guid: e1d1c9d91c10150428433574dc5fd6e8, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4988932048660121640, guid: e1d1c9d91c10150428433574dc5fd6e8, type: 3}
       propertyPath: m_Name
       value: Osumapiste
@@ -456,6 +504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c8178b834ea94f40908567bfd986b7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xpAmount: 25
 --- !u!1001 &7708716726834388955
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -557,3 +606,5 @@ SceneRoots:
   - {fileID: 297629807}
   - {fileID: 1769461576}
   - {fileID: 1861746332}
+  - {fileID: 755014113}
+  - {fileID: 1940018653}
