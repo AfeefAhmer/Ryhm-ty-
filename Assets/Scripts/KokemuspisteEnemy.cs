@@ -1,16 +1,13 @@
 using UnityEngine;
 
-public class KokemuspisteEnemy : MonoBehaviour
+public class XPItem : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [Header("Kokemuspisteiden m‰‰r‰")]
+    public int xpAmount = 25; // Kuinka paljon XP:t‰ esine antaa
 
-    // Update is called once per frame
-    void Update()
+    public void Collect()
     {
-        
+        Debug.Log($"Kokemusesine ker‰tty! +{xpAmount} XP");
+        Destroy(gameObject);
     }
 }
