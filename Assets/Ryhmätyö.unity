@@ -376,6 +376,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pelaaja
       objectReference: {fileID: 0}
+    - target: {fileID: 2077406609741066705, guid: aa34d681fc19dca4b90f8a1389c5df7c, type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 5432902213891052844, guid: 4380e9d368edeca4e87884e3ab4c501d, type: 3}
     - target: {fileID: 6055437103751213464, guid: aa34d681fc19dca4b90f8a1389c5df7c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

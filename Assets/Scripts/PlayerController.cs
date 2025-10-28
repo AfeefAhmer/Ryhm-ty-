@@ -1,11 +1,12 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement2D : MonoBehaviour
 {
     [Header("Liikkuminen")]
     public float speed = 5f;
-    private Rigidbody2D rb;
+    Rigidbody2D rigidbody2d;
     private Vector2 movement;
 
     [Header("Osumapisteet (Health)")]
@@ -17,10 +18,14 @@ public class PlayerMovement2D : MonoBehaviour
     public int levelUpThreshold = 100; // Kuinka paljon XP:tä tarvitaan tason nousuun
     private int level = 1;
 
+    public GameObject projectilePrefab;
+    
+    Vector2 moveDirection = new Vector2(1, 0);
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rigidbody2d = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
+        
     }
 
     void Update()
@@ -28,11 +33,15 @@ public class PlayerMovement2D : MonoBehaviour
         // Liike (WASD / nuolinäppäimet)
         movement.x = Input.GetAxis("Horizontal");
         movement.y = Input.GetAxis("Vertical");
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Launch();
+        }
     }
 
     void FixedUpdate()
     {
-        rb.linearVelocity = movement * speed;
+        rigidbody2d.linearVelocity = movement * speed;
     }
 
     // ---------------------------
@@ -110,5 +119,14 @@ public class PlayerMovement2D : MonoBehaviour
         levelUpThreshold += 50; // kasvattaa seuraavan tason vaatimusta
 
         Debug.Log($"Taso nousi! Uusi taso: {level}");
+    }
+    void Launch()
+    {
+        GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
+        Projectile projectile = projectileObject.GetComponent<Projectile>();
+        projectile.Launch(moveDirection, 300);
+
+
+        
     }
 }
