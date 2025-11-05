@@ -105,7 +105,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -133,6 +133,7 @@ MonoBehaviour:
   maxHealth: 100
   experience: 0
   levelUpThreshold: 100
+  growthScale: 1.5
   projectilePrefab: {fileID: 0}
 --- !u!58 &7987203650324782526
 CircleCollider2D:
