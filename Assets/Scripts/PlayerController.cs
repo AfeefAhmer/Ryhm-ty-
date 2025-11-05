@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement; // ⬅️ tarvitaan scenejen lataamiseen
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -14,13 +15,13 @@ public class PlayerMovement2D : MonoBehaviour
     private int currentHealth;
 
     [Header("Kokemuspisteet (XP)")]
-    public int experience = 0;         // Pelaajan kokemus
-    public int levelUpThreshold = 100; // Kuinka paljon XP:tä tarvitaan tason nousuun
+    public int experience = 0;
+    public int levelUpThreshold = 100;
     private int level = 1;
 
     [Header("Kasvu XP:n mukaan")]
-    private bool hasGrown = false;     // Kasvanutko jo ensimmäisen kerran
-    public float growthScale = 1.5f;   // Kuinka paljon pelaaja kasvaa (1.5 = +50%)
+    private bool hasGrown = false;
+    public float growthScale = 1.5f;
 
     [Header("Ammus")]
     public GameObject projectilePrefab;
@@ -38,17 +39,12 @@ public class PlayerMovement2D : MonoBehaviour
         movement.x = Input.GetAxis("Horizontal");
         movement.y = Input.GetAxis("Vertical");
 
-        // Suuntaa ammus viimeisimmän liikesuunnan mukaan
         if (movement.sqrMagnitude > 0.01f)
-        {
             moveDirection = movement.normalized;
-        }
 
-        // Ammu Space-näppäimellä
+        // Ammu välilyönnillä
         if (Input.GetKeyDown(KeyCode.Space))
-        {
             Launch();
-        }
     }
 
     void FixedUpdate()
@@ -66,7 +62,9 @@ public class PlayerMovement2D : MonoBehaviour
         Debug.Log($"Pelaaja otti vahinkoa! HP: {currentHealth}");
 
         if (currentHealth <= 0)
+        {
             Die();
+        }
     }
 
     public void Heal(int amount)
@@ -78,8 +76,11 @@ public class PlayerMovement2D : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("Pelaaja kuoli!");
-        gameObject.SetActive(false);
+        Debug.Log("💀 Pelaaja kuoli! Peli alkaa alusta...");
+
+        // 🔹 Ladataan nykyinen kenttä uudestaan
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
     }
 
     // ---------------------------
@@ -118,7 +119,6 @@ public class PlayerMovement2D : MonoBehaviour
         experience += amount;
         Debug.Log($"Pelaaja sai {amount} XP! Yhteensä: {experience}");
 
-        // 🔹 Kasva kun XP >= 10 (vain kerran)
         if (experience >= 10 && !hasGrown)
         {
             GrowPlayer();
@@ -133,19 +133,15 @@ public class PlayerMovement2D : MonoBehaviour
     void LevelUp()
     {
         level++;
-        experience = 0; // Nollataan tai jätetään ylijäämä
+        experience = 0;
         levelUpThreshold += 50;
-        hasGrown = false; // Voit sallia uuden kasvun tasonousun jälkeen
-
+        hasGrown = false;
         Debug.Log($"Taso nousi! Uusi taso: {level}");
     }
 
-    // ---------------------------
-    // PELAAN KASVU
-    // ---------------------------
     void GrowPlayer()
     {
-        transform.localScale *= growthScale; // kasvattaa kokoa
+        transform.localScale *= growthScale;
         hasGrown = true;
         Debug.Log("🎉 Pelaaja kasvoi suuremmaksi XP:n ansiosta!");
     }
